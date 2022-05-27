@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"fmt"
+	"net/http"
 	"gorm.io/gorm"
 )
 
@@ -23,15 +24,25 @@ var (
 func main() {
 	defer database.CloseDatabaseConnection(db)
 	r := gin.Default()
+	r.LoadHTMLGlob("view/*.html")
 
 	authRoutes := r.Group("auth")
 	{
 		authRoutes.POST("/register", authController.Register)
+		authRoutes.GET("/register", authController.Register)
+
+		// authRoutes.GET("/register", check)
+		// authRoutes.GET("/register", func(c *gin.Context) {
+		// c.HTML(http.StatusOK, "index.html", gin.H{})
+	// })
 	}
 
 	r.Run(":9000")
 }
 
 func check(c *gin.Context){
-	fmt.Println("yolooo")
+	r := gin.Default()
+	r.LoadHTMLGlob("view/*.html")
+	c.HTML(http.StatusOK, "index.html",gin.H{})
+	fmt.Println("ok")
 }
