@@ -31,6 +31,12 @@ func NewAuthController(authService service.AuthService, jwtService service.JWTSe
 }
 
 func (c *authController) Login(ctx *gin.Context) {
+
+	if (ctx.Request.Method == "GET") {
+		ctx.HTML(http.StatusOK, "login.html", gin.H{})
+		return
+	}
+
 	var loginDTO dto.LoginDTO
 	errDTO := ctx.ShouldBind(&loginDTO)
 	if errDTO != nil {
