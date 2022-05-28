@@ -51,7 +51,12 @@ func (c *authController) Login(ctx *gin.Context) {
 }
 
 func (c *authController) Register(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "index.html",gin.H{})
+
+	if (ctx.Request.Method == "GET") {
+		ctx.HTML(http.StatusOK, "register.html", gin.H{})
+		return
+	}
+
 	var registerDTO dto.RegisterDTO
 	errDTO := ctx.ShouldBind(&registerDTO)
 	if errDTO != nil {
