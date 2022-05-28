@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+<div class="login_form_box">
+    <h1>Login Form</h1>
+    <form id="login_form" method="POST" action="javascript:void(0);">
+        <table id="login_table">
+            <tr>
+                <td align="left">Email</td>
+                <td>:</td>
+                <td><input type="text" id="email" name="email" required="1"/></td>
+            </tr>
+            <tr>
+                <td align="left">Password</td>
+                <td>:</td>
+                <td><input type="password" id="password" name="password" required="1"/></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <div style="margin-top: 20px; margin-bottom: 20px;">
+                        <input type="submit" name="submit" value="Login"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<style type="text/css">
+    body {
+        font-family: Arial;
+    }
+    .login_form_box {
+        padding: 10px;
+        padding-bottom: 40px;
+        margin: auto;
+        margin-top: 30px;
+        width: 40%;
+        border: 1px solid #000;
+        text-align: center;
+    }
+    #login_table {
+        padding: 10px;
+        margin: auto;
+        width: 90%;
+        text-align: left;
+    }
+</style>
+<script type="text/javascript">
+    function get_eid(id) {
+        return document.getElementById(id);
+    }
+
+    function do_login() {
+        let json = {
+            name:       get_eid("email").value.trim(),
+            password:   get_eid("password").value.trim()
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/auth/login");
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send(JSON.stringify(json));
+    }
+    get_eid("login_form").addEventListener("submit", do_login);
+</script>
+</body>
+</html>

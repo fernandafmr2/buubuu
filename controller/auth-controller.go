@@ -31,6 +31,12 @@ func NewAuthController(authService service.AuthService, jwtService service.JWTSe
 }
 
 func (c *authController) Login(ctx *gin.Context) {
+
+	if (ctx.Request.Method == "GET") {
+		ctx.HTML(http.StatusOK, "login.html", gin.H{})
+		return
+	}
+
 	var loginDTO dto.LoginDTO
 	errDTO := ctx.ShouldBind(&loginDTO)
 	if errDTO != nil {
@@ -51,7 +57,12 @@ func (c *authController) Login(ctx *gin.Context) {
 }
 
 func (c *authController) Register(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "index.html",gin.H{})
+
+	if (ctx.Request.Method == "GET") {
+		ctx.HTML(http.StatusOK, "register.html", gin.H{})
+		return
+	}
+
 	var registerDTO dto.RegisterDTO
 	errDTO := ctx.ShouldBind(&registerDTO)
 	if errDTO != nil {

@@ -30,6 +30,8 @@ func main() {
 	{
 		authRoutes.POST("/register", authController.Register)
 		authRoutes.GET("/register", authController.Register)
+		authRoutes.POST("/login", authController.Login)
+		authRoutes.GET("/login", authController.Login)
 
 		// authRoutes.GET("/register", check)
 		// authRoutes.GET("/register", func(c *gin.Context) {
