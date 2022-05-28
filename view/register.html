@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+<div class="register_form_box">
+    <h1>Registration Form</h1>
+    <form id="register_form" method="POST" action="javascript:void(0);">
+        <table id="register_table">
+            <tr>
+                <td align="left">Name</td>
+                <td>:</td>
+                <td><input type="text" id="name" name="name" required="1"/></td>
+            </tr>
+            <tr>
+                <td align="left">Email</td>
+                <td>:</td>
+                <td><input type="text" id="email" name="email" required="1"/></td></tr>
+            <tr>
+                <td align="left">Password</td>
+                <td>:</td>
+                <td><input type="password" id="password" name="password" required="1"/></td></tr>
+            <tr>
+                <td align="left">Retype Password</td>
+                <td>:</td>
+                <td><input type="password" id="cpassword" name="cpassword" required="1"/></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <div style="margin-top: 20px; margin-bottom: 20px;">
+                        <input type="submit" name="submit" value="Register"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<style type="text/css">
+    body {
+        font-family: Arial;
+    }
+    .register_form_box {
+        padding: 10px;
+        padding-bottom: 40px;
+        margin: auto;
+        margin-top: 30px;
+        width: 40%;
+        border: 1px solid #000;
+        text-align: center;
+    }
+    #register_table {
+        padding: 10px;
+        margin: auto;
+        width: 90%;
+        text-align: left;
+    }
+</style>
+<script type="text/javascript">
+    function get_eid(id) {
+        return document.getElementById(id);
+    }
+
+    function do_register() {
+        let json = {
+            name:       get_eid("nama").value.trim(),
+            email:      get_eid("email").value.trim(),
+            /*
+             * Do not trim password, it should be stored as
+             * what it is actually written by the user.
+             */
+            password:   get_eid("password").value,
+            cpassword:  get_eid("cpassword").value,
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/auth/register");
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.send(JSON.stringify(json));
+    }
+    get_eid("register_form").addEventListener("submit", do_register);
+</script>
+</body>
+</html>
