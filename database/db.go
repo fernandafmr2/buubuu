@@ -7,14 +7,13 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"os"
+	
+	_ "github.com/joho/godotenv/autoload"
+
 )
 
 // Setup for creating a new connection to database
 func SetUpDatabaseConnection() *gorm.DB {
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		panic("failed to load env file")
-	}
 
 	dbUser := os.Getenv("DB_USER")
 	dbPass := os.Getenv("DB_PASS")
