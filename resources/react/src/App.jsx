@@ -9,7 +9,7 @@ function App() {
     const handleSubmit = useCallback((e) => {
         e.preventDefault()
 
-        fetch('http://localhost:9000/auth/login', {
+        fetch('/auth/login', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
